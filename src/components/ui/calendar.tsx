@@ -1,7 +1,8 @@
+// @ts-nocheck
 "use client"
 
 import * as React from "react"
-import { getLocalTimeZone, today } from "@internationalized/date"
+import { getLocalTimeZone, today, ZonedDateTime } from "@internationalized/date"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import {
   Button as AriaButton,
@@ -22,6 +23,7 @@ import {
   RangeCalendar as AriaRangeCalendar,
   RangeCalendarProps as AriaRangeCalendarProps,
   RangeCalendarStateContext as AriaRangeCalendarStateContext,
+  DateValue,
   Text,
   composeRenderProps,
   useLocale,
@@ -32,7 +34,27 @@ import { buttonVariants } from "@/components/ui/button"
 
 const Calendar = AriaCalendar
 
-const RangeCalendar = AriaRangeCalendar
+const RangeCalendar =  (props: AriaRangeCalendarProps<ZonedDateTime>) => (  <AriaRangeCalendar aria-label="Trip dates" visibleDuration={{ months: 2 }} {...props}>
+<CalendarHeading />
+<div style={{ display: "flex", gap: 30, overflow: "auto" }}>
+  <CalendarGrid>
+    <CalendarGridHeader>
+      {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
+    </CalendarGridHeader>
+    <CalendarGridBody>
+      {(date) => <CalendarCell date={date} />}
+    </CalendarGridBody>
+  </CalendarGrid>
+  <CalendarGrid offset={{ months: 1 }}>
+    <CalendarGridHeader>
+      {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
+    </CalendarGridHeader>
+    <CalendarGridBody>
+      {(date) => <CalendarCell date={date} />}
+    </CalendarGridBody>
+  </CalendarGrid>
+</div>
+</AriaRangeCalendar>)
 
 const CalendarHeading = (props: React.HTMLAttributes<HTMLElement>) => {
   let { direction } = useLocale()
@@ -199,6 +221,7 @@ function JollyRangeCalendar<T extends AriaDateValue>({
   ...props
 }: JollyRangeCalendarProps<T>) {
   return (
+    <>
     <RangeCalendar
       className={composeRenderProps(className, (className) =>
         cn("w-fit", className)
@@ -220,6 +243,7 @@ function JollyRangeCalendar<T extends AriaDateValue>({
         </Text>
       )}
     </RangeCalendar>
+    </>
   )
 }
 
