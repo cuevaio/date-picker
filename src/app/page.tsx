@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { CalendarIcon } from "lucide-react"
+import { parseDate } from '@internationalized/date';
+import { CalendarIcon } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Calendar,
   CalendarCell,
@@ -11,19 +12,20 @@ import {
   CalendarGridHeader,
   CalendarHeaderCell,
   CalendarHeading,
-} from "@/components/ui/calendar"
-import {
-  DatePicker,
-  DatePickerContent,
-} from "@/components/ui/date-picker"
-import { DateInput } from "@/components/ui/datefield"
-import { FieldGroup, Label } from "@/components/ui/field"
-import { parseDate } from "@internationalized/date";
+  CalendarMonthYearSelector,
+} from '@/components/ui/calendar';
+import { DatePicker, DatePickerContent } from '@/components/ui/date-picker';
+import { DateInput } from '@/components/ui/datefield';
+import { FieldGroup, Label } from '@/components/ui/field';
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center h-screen flex-col">
-      <DatePicker className="w-[200px] space-y-1" minValue={parseDate("2020-01-01")} maxValue={parseDate("2030-01-01")}>
+    <div className="flex h-screen flex-col items-center justify-center">
+      <DatePicker
+        className="w-[200px] space-y-1"
+        minValue={parseDate('2020-01-01')}
+        maxValue={parseDate('2030-01-01')}
+      >
         <Label>Date</Label>
         <FieldGroup>
           <DateInput className="flex-1" variant="ghost" />
@@ -38,6 +40,7 @@ export default function Page() {
         <DatePickerContent>
           <Calendar>
             <CalendarHeading />
+            <CalendarMonthYearSelector />
             <CalendarGrid>
               <CalendarGridHeader>
                 {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
@@ -55,5 +58,5 @@ export default function Page() {
         <div>Max: 2030-01-01</div>
       </div>
     </div>
-  )
+  );
 }

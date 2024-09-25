@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon } from 'lucide-react';
 import {
   DatePicker as AriaDatePicker,
   DatePickerProps as AriaDatePickerProps,
@@ -11,13 +11,13 @@ import {
   DialogProps as AriaDialogProps,
   PopoverProps as AriaPopoverProps,
   ValidationResult as AriaValidationResult,
-  Text,
   composeRenderProps,
-} from "react-aria-components"
+  Text,
+} from 'react-aria-components';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
-import { Button } from "./button"
+import { Button } from './button';
 import {
   Calendar,
   CalendarCell,
@@ -27,40 +27,40 @@ import {
   CalendarHeaderCell,
   CalendarHeading,
   RangeCalendar,
-} from "./calendar"
-import { DateInput } from "./datefield"
-import { FieldError, FieldGroup, Label } from "./field"
-import { Popover } from "./popover"
+} from './calendar';
+import { DateInput } from './datefield';
+import { FieldError, FieldGroup, Label } from './field';
+import { Popover } from './popover';
 
-const DatePicker = AriaDatePicker
+const DatePicker = AriaDatePicker;
 
-const DateRangePicker = AriaDateRangePicker
+const DateRangePicker = AriaDateRangePicker;
 
 const DatePickerContent = ({
   className,
   popoverClassName,
   ...props
-}: AriaDialogProps & { popoverClassName?: AriaPopoverProps["className"] }) => (
+}: AriaDialogProps & { popoverClassName?: AriaPopoverProps['className'] }) => (
   <Popover
     className={composeRenderProps(popoverClassName, (className) =>
-      cn("w-auto p-3", className)
+      cn('w-auto p-3', className),
     )}
   >
     <AriaDialog
       className={cn(
-        "flex w-full flex-col space-y-4 outline-none sm:flex-row sm:space-x-4 sm:space-y-0",
-        className
+        'flex w-full flex-col space-y-4 outline-none sm:flex-row sm:space-x-4 sm:space-y-0',
+        className,
       )}
       {...props}
     />
   </Popover>
-)
+);
 
 interface JollyDatePickerProps<T extends AriaDateValue>
   extends AriaDatePickerProps<T> {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
+  label?: string;
+  description?: string;
+  errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
 function JollyDatePicker<T extends AriaDateValue>({
@@ -73,7 +73,7 @@ function JollyDatePicker<T extends AriaDateValue>({
   return (
     <DatePicker
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn('group flex flex-col gap-2', className),
       )}
       {...props}
     >
@@ -108,14 +108,14 @@ function JollyDatePicker<T extends AriaDateValue>({
         </Calendar>
       </DatePickerContent>
     </DatePicker>
-  )
+  );
 }
 
 interface JollyDateRangePickerProps<T extends AriaDateValue>
   extends AriaDateRangePickerProps<T> {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
+  label?: string;
+  description?: string;
+  errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
 function JollyDateRangePicker<T extends AriaDateValue>({
@@ -128,17 +128,17 @@ function JollyDateRangePicker<T extends AriaDateValue>({
   return (
     <DateRangePicker
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn('group flex flex-col gap-2', className),
       )}
       {...props}
     >
       <Label>{label}</Label>
       <FieldGroup>
-        <DateInput variant="ghost" slot={"start"} />
+        <DateInput variant="ghost" slot={'start'} />
         <span aria-hidden className="px-2 text-sm text-muted-foreground">
           -
         </span>
-        <DateInput className="flex-1" variant="ghost" slot={"end"} />
+        <DateInput className="flex-1" variant="ghost" slot={'end'} />
 
         <Button
           variant="ghost"
@@ -168,7 +168,7 @@ function JollyDateRangePicker<T extends AriaDateValue>({
         </RangeCalendar>
       </DatePickerContent>
     </DateRangePicker>
-  )
+  );
 }
 
 export {
@@ -177,5 +177,5 @@ export {
   DateRangePicker,
   JollyDatePicker,
   JollyDateRangePicker,
-}
-export type { JollyDatePickerProps, JollyDateRangePickerProps }
+};
+export type { JollyDatePickerProps, JollyDateRangePickerProps };

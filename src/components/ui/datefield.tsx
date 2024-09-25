@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { VariantProps } from "class-variance-authority"
+import { VariantProps } from 'class-variance-authority';
 import {
   DateField as AriaDateField,
   DateFieldProps as AriaDateFieldProps,
@@ -13,38 +13,38 @@ import {
   TimeFieldProps as AriaTimeFieldProps,
   TimeValue as AriaTimeValue,
   ValidationResult as AriaValidationResult,
-  Text,
   composeRenderProps,
-} from "react-aria-components"
+  Text,
+} from 'react-aria-components';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
-import { FieldError, Label, fieldGroupVariants } from "./field"
+import { FieldError, fieldGroupVariants, Label } from './field';
 
-const DateField = AriaDateField
+const DateField = AriaDateField;
 
-const TimeField = AriaTimeField
+const TimeField = AriaTimeField;
 
 function DateSegment({ className, ...props }: AriaDateSegmentProps) {
   return (
     <AriaDateSegment
       className={composeRenderProps(className, (className) =>
         cn(
-          "type-literal:px-0 inline rounded p-0.5 caret-transparent outline outline-0",
+          'type-literal:px-0 inline rounded p-0.5 caret-transparent outline outline-0',
           /* Placeholder */
-          "data-[placeholder]:text-muted-foreground",
+          'data-[placeholder]:text-muted-foreground',
           /* Disabled */
-          "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
+          'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
           /* Focused */
-          "data-[focused]:bg-accent data-[focused]:text-accent-foreground",
+          'data-[focused]:bg-accent data-[focused]:text-accent-foreground',
           /* Invalid */
-          "data-[invalid]:data-[focused]:bg-destructive data-[invalid]:data-[focused]:data-[placeholder]:text-destructive-foreground data-[invalid]:data-[focused]:text-destructive-foreground data-[invalid]:data-[placeholder]:text-destructive data-[invalid]:text-destructive",
-          className
-        )
+          'data-[invalid]:data-[focused]:bg-destructive data-[invalid]:data-[focused]:data-[placeholder]:text-destructive-foreground data-[invalid]:data-[focused]:text-destructive-foreground data-[invalid]:data-[placeholder]:text-destructive data-[invalid]:text-destructive',
+          className,
+        ),
       )}
       {...props}
     />
-  )
+  );
 }
 
 interface DateInputProps
@@ -55,24 +55,24 @@ function DateInput({
   className,
   variant,
   ...props
-}: Omit<DateInputProps, "children">) {
+}: Omit<DateInputProps, 'children'>) {
   return (
     <AriaDateInput
       className={composeRenderProps(className, (className) =>
-        cn(fieldGroupVariants({ variant }), "text-sm", className)
+        cn(fieldGroupVariants({ variant }), 'text-sm', className),
       )}
       {...props}
     >
       {(segment) => <DateSegment segment={segment} />}
     </AriaDateInput>
-  )
+  );
 }
 
 interface JollyDateFieldProps<T extends AriaDateValue>
   extends AriaDateFieldProps<T> {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
+  label?: string;
+  description?: string;
+  errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
 function JollyDateField<T extends AriaDateValue>({
@@ -85,7 +85,7 @@ function JollyDateField<T extends AriaDateValue>({
   return (
     <DateField
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn('group flex flex-col gap-2', className),
       )}
       {...props}
     >
@@ -98,14 +98,14 @@ function JollyDateField<T extends AriaDateValue>({
       )}
       <FieldError>{errorMessage}</FieldError>
     </DateField>
-  )
+  );
 }
 
 interface JollyTimeFieldProps<T extends AriaTimeValue>
   extends AriaTimeFieldProps<T> {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
+  label?: string;
+  description?: string;
+  errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
 function JollyTimeField<T extends AriaTimeValue>({
@@ -118,7 +118,7 @@ function JollyTimeField<T extends AriaTimeValue>({
   return (
     <TimeField
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn('group flex flex-col gap-2', className),
       )}
       {...props}
     >
@@ -127,7 +127,7 @@ function JollyTimeField<T extends AriaTimeValue>({
       {description && <Text slot="description">{description}</Text>}
       <FieldError>{errorMessage}</FieldError>
     </TimeField>
-  )
+  );
 }
 
 export {
@@ -137,5 +137,5 @@ export {
   TimeField,
   JollyDateField,
   JollyTimeField,
-}
-export type { DateInputProps, JollyDateFieldProps, JollyTimeFieldProps }
+};
+export type { DateInputProps, JollyDateFieldProps, JollyTimeFieldProps };
